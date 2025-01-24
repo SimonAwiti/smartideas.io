@@ -31,7 +31,6 @@
                 <?php
                 include('fetch_ideas.php'); // Include the fetch_ideas.php file
 
-                // Fetch the ideas from the database
                 $ideas = fetchIdeas($con);
 
                 if ($ideas !== null) {
@@ -45,7 +44,12 @@
                                 <td>" . $row['idea_type'] . "</td>
                                 <td>" . $row['brief_description'] . "</td>
                                 <td>" . $row['votes'] . "</td>
-                                <td><button class='btn btn-primary'>Vote</button></td>
+                                <td>
+                                    <form method='POST' action='vote.php'>
+                                        <input type='hidden' name='idea_id' value='" . $row['id'] . "'>
+                                        <button type='submit' name='vote' class='btn btn-primary'>Vote</button>
+                                    </form>
+                                </td>
                             </tr>";
                     }
                 } else {
@@ -53,6 +57,7 @@
                 }
                 ?>
             </tbody>
+
         </table>
     </div>
 
