@@ -24,8 +24,8 @@
                     <th>In Search of</th> <!-- New column for 'In Search of' -->
                     <th>Idea Type</th>
                     <th>Brief Description of Idea</th>
-                    <th>Votes</th>
-                    <th>Vote</th>
+                    <th>Likes</th>
+                    <th>#</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,7 +49,7 @@
                                 <td>
                                     <form method='POST' action='vote.php'>
                                         <input type='hidden' name='idea_id' value='" . $row['id'] . "'>
-                                        <button type='submit' name='vote' class='btn btn-primary'>Vote</button>
+                                        <button type='submit' name='vote' class='btn btn-primary'>Like</button>
                                     </form>
                                 </td>
                             </tr>";
