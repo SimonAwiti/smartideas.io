@@ -1,16 +1,19 @@
 <?php
 include('include/config.php'); // Database connection
 
-// Get the user's IP address or use cookies (we'll use IP here)
+// Get the user's IP address
 $user_ip = $_SERVER['REMOTE_ADDR'];
 
-// Check if the vote is already stored in the cookie
+// Check if the user has already voted for this idea by checking the cookie
 if (isset($_COOKIE['voted_' . $user_ip])) {
-    echo "You have already voted for this idea.";
+    echo "<script type='text/javascript'>
+            alert('You have already liked this idea.');
+            window.location.href = 'allideas.php'; // Redirect back to the main page
+          </script>";
     exit;
 }
 
-// Check if a vote was submitted
+// Check if the vote was submitted
 if (isset($_POST['vote'])) {
     $idea_id = $_POST['idea_id'];
 
@@ -23,7 +26,10 @@ if (isset($_POST['vote'])) {
 
     if ($result->num_rows > 0) {
         // User has already voted for this idea
-        echo "You have already voted for this idea.";
+        echo "<script type='text/javascript'>
+                alert('You have already liked this idea.');
+                window.location.href = 'allideas.php'; // Redirect back to the main page
+              </script>";
     } else {
         // Insert the vote into the votes table
         $insertVoteQuery = "INSERT INTO votes (user_ip, idea_id) VALUES (?, ?)";
@@ -37,10 +43,14 @@ if (isset($_POST['vote'])) {
         $stmt->bind_param("i", $idea_id);
         $stmt->execute();
 
-        // Set a cookie to mark the user as having voted
+        // Set a cookie to mark the user as having voted for this idea
         setcookie('voted_' . $user_ip, '1', time() + (30 * 24 * 60 * 60), "/"); // Cookie lasts for 30 days
 
-        echo "Your vote has been successfully recorded!";
+        // Show the success message with JavaScript alert and redirect
+        echo "<script type='text/javascript'>
+                alert('Your like has been successfully recorded!');
+                window.location.href = 'allideas.php'; // Redirect back to the main page
+              </script>";
     }
 }
 ?>
