@@ -21,6 +21,7 @@
                     <th>Name</th>
                     <th>Contact</th>
                     <th>Country</th>
+                    <th>In Search of</th> <!-- New column for 'In Search of' -->
                     <th>Idea Type</th>
                     <th>Brief Description of Idea</th>
                     <th>Votes</th>
@@ -31,7 +32,7 @@
                 <?php
                 include('fetch_ideas.php'); // Include the fetch_ideas.php file
 
-                $ideas = fetchIdeas($con);
+                $ideas = fetchIdeas($con); // Fetch ideas (adjust fetch_ideas.php accordingly)
 
                 if ($ideas !== null) {
                     // Loop through the results and display each row
@@ -41,6 +42,7 @@
                                 <td>" . $row['name'] . "</td>
                                 <td>" . $row['contact'] . "</td>
                                 <td>" . $row['country'] . "</td>
+                                <td>" . $row['in_search_of'] . "</td> <!-- Display the 'In Search of' value -->
                                 <td>" . $row['idea_type'] . "</td>
                                 <td>" . $row['brief_description'] . "</td>
                                 <td>" . $row['votes'] . "</td>
@@ -53,7 +55,7 @@
                             </tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='8' class='text-center'>No ideas available</td></tr>";
+                    echo "<tr><td colspan='9' class='text-center'>No ideas available</td></tr>";
                 }
                 ?>
             </tbody>
