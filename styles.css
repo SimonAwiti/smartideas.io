@@ -86,3 +86,44 @@ tr:hover td {
         font-size: 0.9rem;
     }
 }
+
+/* For mobile screens, show each idea as a box (card) */
+@media (max-width: 576px) {
+    .table-responsive {
+        display: none; /* Hide the original table */
+    }
+    
+    .card {
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .card-title {
+        font-size: 1.25rem;
+    }
+    
+    .card-body {
+        padding: 10px;
+    }
+    
+    .card-body p {
+        font-size: 0.875rem;
+        margin-bottom: 10px;
+    }
+    
+    .card-body form {
+        margin-top: 10px;
+    }
+}
+
+/* For larger screens, show the table */
+@media (min-width: 577px) {
+    .d-none {
+        display: block !important; /* Show the table */
+    }
+
+    .d-sm-table {
+        display: table !important;
+    }
+}

@@ -14,7 +14,8 @@
     <h1>All Posted Ideas</h1>
 
     <div class="table-responsive">
-        <table class="table table-striped table-bordered">
+        <!-- Table for larger screens -->
+        <table class="table table-striped table-bordered d-none d-sm-table">
             <thead>
                 <tr>
                     <th>#</th>
@@ -59,10 +60,42 @@
                 }
                 ?>
             </tbody>
-
         </table>
+
+        <!-- Box/Card Layout for Small Screens -->
+        <div class="d-block d-sm-none">
+            <?php
+            // Fetch ideas again for small screen layout
+            $ideas = fetchIdeas($con);
+
+            if ($ideas !== null) {
+                // Loop through the results and display each idea as a card
+                while ($row = $ideas->fetch_assoc()) {
+                    echo "<div class='card mb-3'>
+                            <div class='card-body'>
+                                <h5 class='card-title'>Idea #" . $row['id'] . "</h5>
+                                <p><strong>Name:</strong> " . $row['name'] . "</p>
+                                <p><strong>Contact:</strong> " . $row['contact'] . "</p>
+                                <p><strong>Country:</strong> " . $row['country'] . "</p>
+                                <p><strong>In Search of:</strong> " . $row['in_search_of'] . "</p> <!-- Display the 'In Search of' value -->
+                                <p><strong>Idea Type:</strong> " . $row['idea_type'] . "</p>
+                                <p><strong>Description:</strong> " . $row['brief_description'] . "</p>
+                                <p><strong>Likes:</strong> " . $row['votes'] . "</p>
+                                <form method='POST' action='vote.php'>
+                                    <input type='hidden' name='idea_id' value='" . $row['id'] . "'>
+                                    <button type='submit' name='vote' class='btn btn-primary'>Like</button>
+                                </form>
+                            </div>
+                        </div>";
+                }
+            } else {
+                echo "<p>No ideas available</p>";
+            }
+            ?>
+        </div>
     </div>
 
+    <!-- Pagination (This can be customized to show dynamic page numbers based on your setup) -->
     <div class="d-flex justify-content-center">
         <nav aria-label="Page navigation">
             <ul class="pagination">
