@@ -32,7 +32,24 @@ exit();
 <head>
 	<title>SmartIdeas.io | User login</title>
 	<link rel="stylesheet" href="../admin/assets/css/style.css">
-	
+	<style>
+		/* Apply background color to html and body */
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			background-color: rgba(255, 173, 1, 0.8) !important;
+		}
+
+		/* Ensure the auth-wrapper covers the full height */
+		.auth-wrapper {
+			background-color: rgba(255, 173, 1, 0.8) !important;
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	</style>
 </head>
 
 <!-- [ auth-signin ] start -->
@@ -83,10 +100,6 @@ exit();
 <!-- Required Js -->
 <script src="../admin/assets/js/vendor-all.min.js"></script>
 <script src="../admin/assets/js/plugins/bootstrap.min.js"></script>
-
-
-
-
 
 </body>
 

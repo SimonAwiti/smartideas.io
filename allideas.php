@@ -10,19 +10,22 @@
 </head>
 <body>
 
-<div class="container">
-    <h1>All Posted Ideas</h1>
 
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2 class="mb-0">All Posted Ideas</h2>
+        <a href="user/index.php" class="btn btn-primary" style="background-color: #2A095D; color: white;">Post your idea</a>
+    </div>
     <div class="table-responsive">
         <!-- Table for larger screens -->
-        <table class="table table-striped table-bordered d-none d-sm-table">
+        <table class="table table-striped table-bordered">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Name</th>
                     <th>Contact</th>
                     <th>Country</th>
-                    <th>In Search of</th> <!-- New column for 'In Search of' -->
+                    <th>In Search of</th>
                     <th>Idea Type</th>
                     <th>Brief Description of Idea</th>
                     <th>Likes</th>
@@ -43,14 +46,14 @@
                                 <td>" . $row['name'] . "</td>
                                 <td>" . $row['contact'] . "</td>
                                 <td>" . $row['country'] . "</td>
-                                <td>" . $row['in_search_of'] . "</td> <!-- Display the 'In Search of' value -->
+                                <td>" . $row['in_search_of'] . "</td>
                                 <td>" . $row['idea_type'] . "</td>
                                 <td>" . $row['brief_description'] . "</td>
                                 <td>" . $row['votes'] . "</td>
                                 <td>
                                     <form method='POST' action='vote.php'>
                                         <input type='hidden' name='idea_id' value='" . $row['id'] . "'>
-                                        <button type='submit' name='vote' class='btn btn-primary'>Like</button>
+                                        <button type='submit' name='vote' class='btn btn-primary' style='background-color: #2A095D; color: white;'>Like</button>
                                     </form>
                                 </td>
                             </tr>";
@@ -77,7 +80,7 @@
                                 <p><strong>Name:</strong> " . $row['name'] . "</p>
                                 <p><strong>Contact:</strong> " . $row['contact'] . "</p>
                                 <p><strong>Country:</strong> " . $row['country'] . "</p>
-                                <p><strong>In Search of:</strong> " . $row['in_search_of'] . "</p> <!-- Display the 'In Search of' value -->
+                                <p><strong>In Search of:</strong> " . $row['in_search_of'] . "</p>
                                 <p><strong>Idea Type:</strong> " . $row['idea_type'] . "</p>
                                 <p><strong>Description:</strong> " . $row['brief_description'] . "</p>
                                 <p><strong>Likes:</strong> " . $row['votes'] . "</p>
@@ -95,7 +98,7 @@
         </div>
     </div>
 
-    <!-- Pagination (This can be customized to show dynamic page numbers based on your setup) -->
+    <!-- Pagination -->
     <div class="d-flex justify-content-center">
         <nav aria-label="Page navigation">
             <ul class="pagination">

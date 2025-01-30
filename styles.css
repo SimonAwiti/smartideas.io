@@ -5,15 +5,17 @@ body {
     margin: 0;
     padding: 0;
 }
+
 .container {
     background-color: #ffffff;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    padding: 25px;
+    padding: 30px;
     max-width: 90%;
     margin: 50px auto;
     overflow-x: auto;
 }
+
 h1 {
     color: #2A095D;
     font-weight: 600;
@@ -22,6 +24,7 @@ h1 {
     text-transform: uppercase;
     letter-spacing: 2px;
 }
+
 table.table-striped.table-bordered {
     width: 100%;
     margin-top: 50px;
@@ -29,6 +32,7 @@ table.table-striped.table-bordered {
     border-collapse: collapse;
     border: 2px solid #2A095D;
 }
+
 table.table-striped.table-bordered th,
 table.table-striped.table-bordered td {
     vertical-align: middle;
@@ -37,6 +41,7 @@ table.table-striped.table-bordered td {
     font-size: 1.0rem;
     border: 2px solid #2A095D;
 }
+
 table.table-striped.table-bordered th {
     background-color: #F3C611;
     color: #333;
@@ -44,86 +49,87 @@ table.table-striped.table-bordered th {
     text-align: center;
     letter-spacing: 1px;
 }
+
 td {
     background-color: #f9f9f9;
 }
+
 tr:hover td {
     background-color: #f1f1f1;
     transition: background-color 0.3s ease;
 }
+
 .pagination {
     margin-top: 20px;
     justify-content: center;
 }
+
 .page-item.active .page-link {
     background-color: #2A095D;
     border-color: #2A095D;
     color: white;
 }
+
 .page-link {
     color: #2A095D;
 }
+
 .page-link:hover {
     background-color: #2A095D;
     color: white;
 }
+
 .pagination .page-item {
     border-radius: 5px;
 }
+
 .table-responsive {
     overflow-x: auto;
 }
-@media (max-width: 768px) {
-    .container {
-        padding: 20px;
-    }
-    h1 {
-        font-size: 1.5rem;
-    }
-    table.table-striped.table-bordered th,
-    table.table-striped.table-bordered td {
-        padding: 12px;
-        font-size: 0.9rem;
-    }
-}
 
-/* For mobile screens, show each idea as a box (card) */
+/* Hide the table on small screens */
 @media (max-width: 576px) {
-    .table-responsive {
-        display: none; /* Hide the original table */
+    .table-responsive table {
+        display: none; /* Hide the table on small screens */
     }
-    
+
+    /* Show card layout */
+    .d-block.d-sm-none {
+        display: block; /* Ensure that the card layout is shown */
+    }
+
     .card {
         border: 1px solid #ddd;
         padding: 15px;
         margin-bottom: 15px;
+        border-radius: 10px;
     }
-    
+
     .card-title {
         font-size: 1.25rem;
     }
-    
+
     .card-body {
         padding: 10px;
     }
-    
+
     .card-body p {
         font-size: 0.875rem;
         margin-bottom: 10px;
     }
-    
+
     .card-body form {
         margin-top: 10px;
     }
 }
 
-/* For larger screens, show the table */
+/* Show the table on larger screens */
 @media (min-width: 577px) {
-    .d-none {
-        display: block !important; /* Show the table */
+    .table-responsive table {
+        display: table; /* Show the table */
     }
 
-    .d-sm-table {
-        display: table !important;
+    .d-block.d-sm-none {
+        display: none; /* Hide the card layout */
     }
 }
