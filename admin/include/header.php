@@ -72,7 +72,7 @@ $name=$row['fullname'];
 
 ?>
 										<span> <?php echo $name; ?></span>
-										<a href="logout.php" class="dud-logout" title="Logout">
+										<a href="../logout.php" class="dud-logout" title="Logout">
 											<i class="feather icon-log-out"></i>
 										</a>
 									</div>
