@@ -5,7 +5,7 @@
    <!-- basic -->
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Smartideas.io</title>
+   <title>GoxLog.com</title>
   
    <!-- Bootstrap CSS -->
    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -34,10 +34,10 @@
          <div class="row">
             <div class="col-sm-3 col-6">
                <!-- Logo with SmartIdeas.io -->
-               <a class="logo" href="index.php"><h1 style="font-size: 40px;color: white;">SmartIdeas.io</h1></a>
+               <a class="logo" href="index.php"><h1 style="font-size: 45px;color: black;"><b>GoxLog.com</b></h1></a>
             </div>
          </div>
-      </div>
+      </div><br>
       <!-- Banner Section Start -->
       <div class="banner_section layout_padding">
          <div class="container">
@@ -45,7 +45,8 @@
                <div class="carousel-inner">
                   <!-- First Carousel Item -->
                   <div class="carousel-item active">
-                     <h1 class="banner_taital">Lodge Your Smart Ideas </h1>
+                     <h1 class="banner_taital">Marketplace for Business Ideas</h1>
+                     <h3 class="banner_taital">Do you have a good business Idea?</h3>
                      <div class="read_bt"></div>
                      <div class="number_main">
                         <div class="number_text">01</div><br>  
@@ -57,7 +58,8 @@
                   </div>
                   <!-- Second Carousel Item -->
                   <div class="carousel-item">
-                     <h1 class="banner_taital">Get to Network</h1>
+                     <h2 class="banner_taital">Do you have a good business Idea?</h2>
+                     <h1 class="banner_taital">Start today by posting your business idea</h1>
                      <div class="read_bt"></div>
                      <div class="number_main">
                         <div class="number_text">02</div><br>
@@ -88,8 +90,8 @@
             Smart Ideas Portal - How it Works
          </p>
          <p class="copyright_text" style="margin-bottom: 5px;">1. Register then log in to your account</p>
-         <p class="copyright_text" style="margin-bottom: 5px;">2. Post your idea</p>
-         <p class="copyright_text" style="margin-bottom: 5px;">3. Checkout by paying Ksh. 200</p>
+         <p class="copyright_text" style="margin-bottom: 5px;">2. Pay Ksh. 200 or 10 US Dollars</p>
+         <p class="copyright_text" style="margin-bottom: 5px;">3. Post your business idea</p>
          <p class="copyright_text" style="margin-top: 5px;">4. Sitback & wait to get noticed by our investors</p>
       </div>
    </div>

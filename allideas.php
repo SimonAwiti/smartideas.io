@@ -23,9 +23,9 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>Contact</th>
+                    <th>Contact <br>Phone/Email</th>
                     <th>Country</th>
-                    <th>In Search of</th>
+                    <th>Looking for</th>
                     <th>Idea Type</th>
                     <th>Brief Description of Idea</th>
                     <th>Likes</th>
