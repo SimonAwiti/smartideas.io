@@ -71,8 +71,8 @@
 
                         <div class="col-lg-7 col-12">
                             <div class="hero-text">
-                                <h3 class="mb-4" style="color:white;">Do you have a good business idea & you're in need of cash or business partner?</h3>
-                                <h5 class="mb-4"style="color:white;">Post your business idea here at Goxlog Global marketplace and stand a chance to get a business partner, investor or a well wisher.</h5>
+                                <h3 class="mb-4" style="color:white;">Do you have a good business idea & you're in need of cash or a business partner?</h3>
+                                <h5 class="mb-4"style="color:white;">Post your business idea here at Goxlog Global marketplace and stand a chance of getting a business partner, investor or a well wisher.</h5>
                                 <p class="mb-4" ><a class="custom-btn btn custom-link" href="#section_2">Get started</a></p>
                             </div>
                         </div>
