@@ -1,293 +1,227 @@
+<?php
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit();
+}
+
+// Include database connection
+include('../include/config.php');
+
+// Fetch the user's information
+$user_id = $_SESSION['user_id'];
+$stmt = $conn->prepare("SELECT fullname FROM users WHERE id = :id");
+$stmt->bindParam(':id', $user_id);
+$stmt->execute();
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+?>
+
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Simon Awiti">
+    <title>Dashboard - Goxlog.com</title>
 
-        <meta name="description" content="">
-        <meta name="author" content="Simon Awiti">
-
-        <title>Dashboard - Goxlog.com</title>
-
-        <!-- CSS FILES -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/bootstrap-icons.css" rel="stylesheet">
-        <link href="css/magnific-popup.css" rel="stylesheet">
-        <link href="css/templatemo-first-portfolio-style.css" rel="stylesheet">
-
-        <style>
-            /* Custom styles for the dashboard */
-            body {
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
-                background-color: #f8f9fa;
-                margin: 0;
-            }
-
-            /* Header */
-            .header {
-                background-color: #535da1;
-                color: #fff;
-                padding: 15px 20px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            }
-
-            .header .logo {
-                font-size: 24px;
-                font-weight: 500;
-                color: #fff;
-                text-decoration: none;
-            }
-
-            .header .menu-toggle {
-                display: none;
-                background: none;
-                border: none;
-                color: #fff;
-                font-size: 24px;
-                cursor: pointer;
-            }
-
-            .header .nav-links {
-                display: flex;
-                align-items: center;
-                gap: 20px;
-            }
-
-            .header .nav-links a {
-                color: #fff;
-                text-decoration: none;
-                font-size: 16px;
-                transition: opacity 0.3s;
-            }
-
-            .header .nav-links a:hover {
-                opacity: 0.8;
-            }
-
-            /* Sidebar */
-            .sidebar {
-                width: 250px;
-                background-color: #535da1;
-                color: #fff;
-                padding: 20px;
-                min-height: calc(100vh - 60px); /* Adjust for header height */
-                box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-                transition: transform 0.3s ease;
-            }
-
-            .sidebar h2 {
-                color: #fff;
-                margin-bottom: 20px;
-                text-align: center;
-                font-size: 22px;
-                font-weight: 500;
-            }
-
-            .sidebar ul {
-                list-style: none;
-                padding: 0;
-            }
-
-            .sidebar ul li {
-                margin-bottom: 15px;
-            }
-
-            .sidebar ul li a {
-                color: #fff;
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-                padding: 10px;
-                border-radius: 5px;
-                transition: background-color 0.3s;
-            }
-
-            .sidebar ul li a:hover {
-                background-color: rgba(255, 255, 255, 0.1);
-            }
-
-            .sidebar ul li a i {
-                margin-right: 10px;
-                font-size: 18px;
-            }
-
-            .logout-link {
-                color: #fff;
-                background-color: #ff4d4d;
-                padding: 10px;
-                border-radius: 5px;
-                text-align: center;
-                display: block;
-                margin-top: 20px;
-                text-decoration: none;
-                transition: background-color 0.3s;
-            }
-
-            .logout-link:hover {
-                background-color: #ff1a1a;
-            }
-
-            /* Main Content */
-            .main-content {
-                flex: 1;
-                padding: 20px;
-                background-color: #fff;
-                margin-left: 250px; /* Adjust for sidebar width */
-                transition: margin-left 0.3s ease;
-            }
-
-            .main-content h1 {
-                color: #535da1;
-                margin-bottom: 20px;
-                font-size: 28px;
-                font-weight: 600;
-            }
-
-            .main-content p {
-                color: #333;
-                font-size: 16px;
-                line-height: 1.6;
-            }
-
-            .main-content .card {
-                background-color: #fff;
-                border: 1px solid #e0e0e0;
-                border-radius: 10px;
-                padding: 20px;
-                margin-bottom: 20px;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            }
-
-            .main-content .card h3 {
-                color: #535da1;
-                margin-bottom: 10px;
-                font-size: 20px;
-                font-weight: 500;
-            }
-
-            .main-content .card p {
-                color: #666;
-                font-size: 14px;
-            }
-
-            /* Responsive Design */
-            @media (max-width: 768px) {
-                .header .menu-toggle {
-                    display: block;
-                }
-
-                .sidebar {
-                    position: fixed;
-                    top: 60px; /* Adjust for header height */
-                    left: -250px; /* Hide sidebar by default */
-                    z-index: 1000;
-                    height: calc(100vh - 60px);
-                }
-
-                .sidebar.active {
-                    left: 0; /* Show sidebar when active */
-                }
-
-                .main-content {
-                    margin-left: 0;
-                }
-            }
-        </style>
-    </head>
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap-icons.css" rel="stylesheet">
+    <link href="../css/magnific-popup.css" rel="stylesheet">
+    <link href="../css/templatemo-first-portfolio-style.css" rel="stylesheet">
     
-    <body>
+    <!-- Custom CSS -->
+    <style>
+        /* Sidebar styling */
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #14B789;
+            padding-top: 120px; /* Space for the header */
+            z-index: 90;
+            transition: all 0.3s ease;
+        }
 
-        <!-- Header -->
-        <header class="header">
-            <a href="index.html" class="logo">Goxlog.com</a>
-            <button class="menu-toggle" id="menu-toggle">
-                <i class="bi bi-list"></i>
-            </button>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="login.html">Log Out</a>
-            </div>
+        .sidebar .welcome-msg {
+            padding-left: 20px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .sidebar .nav-link {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #727aab;;
+        }
+
+        /* Main header styling */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #14B789;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.0);
+            z-index: 101; /* Ensure header is above the sidebar */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .main-header h3 {
+            margin: 0;
+        }
+
+        /* Hamburger button styling */
+        .hamburger-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* Content area styling */
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+            padding-top: 70px; /* Space for the header */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 767px) {
+            .sidebar {
+                width: 0;
+                overflow: hidden;
+            }
+
+            .sidebar.active {
+                width: 250px;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+
+            .hamburger-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <!-- Main Header -->
+        <header class="main-header">
+            <!-- Hamburger Button for Small Screens -->
+            <span class="hamburger-btn" id="hamburger-btn">&#9776;</span>
+            <h5 style="color:#b92504;"><img src="../images/logo.png" alt="Goxlog Logo" class="logo-img" style="height: 80px;"></h5>
         </header>
 
         <!-- Sidebar -->
-        <div class="sidebar" id="sidebar">
-            <h2>Dashboard</h2>
-            <ul>
-                <li>
-                    <a href="#">
-                        <i class="bi bi-lightbulb"></i> All Posted Ideas
+        <nav class="sidebar" id="sidebar">
+            <div class="welcome-msg">
+                <h7 style="color:white;">Welcome, <?php echo htmlspecialchars($user['fullname']); ?></h7>
+            </div>
+
+            <ul class="nav flex-column mt-3">
+                <li class="nav-item">
+                    <a style="color:white;" class="nav-link active" href="../index.php">
+                        <i class="bi bi-house-door-fill"></i> Home
                     </a>
                 </li>
-                <li>
-                    <a href="#">
-                        <i class="bi bi-plus-circle"></i> Post an Idea
+                <li class="nav-item">
+                    <a style="color:white;" class="nav-link" href="posted_ideas.php">
+                        <i class="bi bi-lightbulb-fill"></i> All Posted Ideas
                     </a>
                 </li>
-                <li>
-                    <a href="login.html" class="logout-link">
-                        <i class="bi bi-box-arrow-left"></i> Log Out
+                <li class="nav-item">
+                    <a style="color:white;" class="nav-link" href="post_idea.php">
+                        <i class="bi bi-pencil-square"></i> Post Idea
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a style="color:white;" class="nav-link" href="logout.php">
+                        <i class="bi bi-box-arrow-right"></i> Logout
                     </a>
                 </li>
             </ul>
-        </div>
+        </nav>
+<!-- Main Content -->
+<div class="content" id="content"><br><br><br>
 
-        <!-- Main Content -->
-        <div class="main-content" id="main-content">
-            <h1>Welcome to Your Dashboard</h1>
-            <p>Here, you can manage your ideas, view all posted ideas, and post new ones. Use the sidebar to navigate.</p>
-
-            <!-- Example Content -->
+    <!-- Example for displaying posted ideas -->
+    <div class="row">
+        <!-- First Card -->
+        <div class="col-lg-4 col-md-6 mb-4">
             <div class="card">
-                <h3>Idea 1: E-commerce Platform for Artisans</h3>
-                <p>A platform where artisans can showcase and sell their handmade products to a global audience.</p>
-            </div>
-
-            <div class="card">
-                <h3>Idea 2: Water Intake Tracker App</h3>
-                <p>A mobile app that helps users track their daily water intake and stay hydrated.</p>
-            </div>
-
-            <div class="card">
-                <h3>Idea 3: Community Recycling Initiative</h3>
-                <p>A community-driven program to promote recycling and reduce waste in local neighborhoods.</p>
+                <div class="card-body">
+                    <h5 class="card-title">Posted Ideas Manager</h5>
+                    <p class="card-text">You can edit your posted idea here.</p>
+                    <a style="background:#727aab;" href="#" class="btn btn-primary">Edit posted ideas</a>
+                </div>
             </div>
         </div>
 
-        <!-- JAVASCRIPT FILES -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.sticky.js"></script>
-        <script src="js/click-scroll.js"></script>
-        <script src="js/jquery.magnific-popup.min.js"></script>
-        <script src="js/magnific-popup-options.js"></script>
-        <script src="js/custom.js"></script>
+        <!-- Second Card -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">New Idea Submissions</h5>
+                    <p class="card-text">Review and approve or reject new idea submissions here.</p>
+                    <a style="background:#727aab;" href="#" class="btn btn-primary">Manage Submissions</a>
+                </div>
+            </div>
+        </div>
 
-        <script>
-            // Toggle sidebar on mobile
-            const menuToggle = document.getElementById('menu-toggle');
-            const sidebar = document.getElementById('sidebar');
-            const mainContent = document.getElementById('main-content');
+        <!-- Third Card -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">User Feedback</h5>
+                    <p class="card-text">Review feedback and comments from users on ideas.</p>
+                    <a style="background:#727aab;" href="#" class="btn btn-primary">View Feedback</a>
+                </div>
+            </div>
+        </div>
 
-            menuToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('active');
-            });
 
-            // Close sidebar when clicking outside on mobile
-            document.addEventListener('click', (event) => {
-                if (window.innerWidth <= 768 && !sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
-                    sidebar.classList.remove('active');
-                }
-            });
-        </script>
 
-    </body>
+    </div>
+</div>
+
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery.sticky.js"></script>
+    <script src="../js/click-scroll.js"></script>
+    <script src="../js/jquery.magnific-popup.min.js"></script>
+    <script src="../js/magnific-popup-options.js"></script>
+    <script src="../js/custom.js"></script>
+
+    <!-- JavaScript for Sidebar Toggle -->
+    <script>
+        // Handle sidebar toggle for small screens
+        document.getElementById("hamburger-btn").addEventListener("click", function() {
+            document.getElementById("sidebar").classList.toggle("active");
+            document.getElementById("content").classList.toggle("active");
+        });
+    </script>
+</body>
 </html>

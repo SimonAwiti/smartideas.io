@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
 
                                 <!-- Submit Button -->
-                                <button type="submit" class="btn btn-primary w-100">Register</button>
+                                <button style="background:#727aab;" type="submit" class="btn btn-primary w-100">Register</button>
 
                                 <p class="mt-3 text-center">Already have an account? <a href="login.php">Login</a></p>
                                 <p class="mt-3 text-center">Back to home page <a href="../index.php">Home</a></p>
