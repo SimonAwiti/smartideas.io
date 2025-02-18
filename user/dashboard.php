@@ -184,7 +184,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="card-body">
                     <h5 class="card-title">New Idea Submissions</h5>
                     <p class="card-text">Review and approve or reject new idea submissions here.</p>
-                    <a style="background:#727aab;" href="#" class="btn btn-primary">Manage Submissions</a>
+                    <a style="background:#727aab;" href="post_idea.php" class="btn btn-primary">Manage Submissions</a>
                 </div>
             </div>
         </div>
