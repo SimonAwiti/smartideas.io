@@ -1,15 +1,11 @@
 <?php
-include('include/config.php'); // Include the database connection file
+// fetch_ideas.php
+include('include/config.php'); // Include your DB connection
 
-function fetchIdeas($con) {
-    $sql = "SELECT * FROM ideas ORDER BY id ASC"; // Query to fetch all ideas
-    $result = $con->query($sql);
-
-    // Check if any data was returned
-    if ($result->num_rows > 0) {
-        return $result;
-    } else {
-        return null; // No data found
-    }
+function fetchIdeas($conn) {
+    $stmt = $conn->prepare("SELECT * FROM posted_ideas ORDER BY id DESC"); // Adjust column names if necessary
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch all posted ideas as an associative array
 }
 ?>
+

@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Login successful
             $_SESSION['user_id'] = $user['id']; // Store user ID in session
             $_SESSION['phone'] = $user['phone']; // Store email in session
-            header('Location: dashboard.php'); // Redirect to dashboard
+            header('Location: ../allideas.php'); // Redirect to dashboard
             exit();
         } else {
             $error = "Invalid phone number or password.";

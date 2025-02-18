@@ -146,7 +146,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a style="color:white;" class="nav-link" href="posted_ideas.php">
+                    <a style="color:white;" class="nav-link" href="../allideas.php">
                         <i class="bi bi-lightbulb-fill"></i> All Posted Ideas
                     </a>
                 </li>

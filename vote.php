@@ -9,13 +9,14 @@ if (isset($_POST['vote'])) {
     $idea_id = $_POST['idea_id'];
 
     // Check if the user has already voted for this idea based on their IP
-    $checkVoteQuery = "SELECT * FROM votes WHERE user_ip = ? AND idea_id = ?";
-    $stmt = $con->prepare($checkVoteQuery);
-    $stmt->bind_param("si", $user_ip, $idea_id);
+    $checkVoteQuery = "SELECT * FROM votes WHERE user_ip = :user_ip AND idea_id = :idea_id";
+    $stmt = $conn->prepare($checkVoteQuery);
+    $stmt->bindParam(':user_ip', $user_ip, PDO::PARAM_STR);
+    $stmt->bindParam(':idea_id', $idea_id, PDO::PARAM_INT);
     $stmt->execute();
-    $result = $stmt->get_result();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($result->num_rows > 0) {
+    if ($result) {
         // User has already voted for this idea
         echo "<script type='text/javascript'>
                 alert('You have already liked this idea.');
@@ -23,15 +24,16 @@ if (isset($_POST['vote'])) {
               </script>";
     } else {
         // Insert the vote into the votes table
-        $insertVoteQuery = "INSERT INTO votes (user_ip, idea_id) VALUES (?, ?)";
-        $stmt = $con->prepare($insertVoteQuery);
-        $stmt->bind_param("si", $user_ip, $idea_id);
+        $insertVoteQuery = "INSERT INTO votes (user_ip, idea_id) VALUES (:user_ip, :idea_id)";
+        $stmt = $conn->prepare($insertVoteQuery);
+        $stmt->bindParam(':user_ip', $user_ip, PDO::PARAM_STR);
+        $stmt->bindParam(':idea_id', $idea_id, PDO::PARAM_INT);
         $stmt->execute();
 
         // Update the votes count in the ideas table
-        $updateVoteCountQuery = "UPDATE ideas SET votes = votes + 1 WHERE id = ?";
-        $stmt = $con->prepare($updateVoteCountQuery);
-        $stmt->bind_param("i", $idea_id);
+        $updateVoteCountQuery = "UPDATE posted_ideas SET likes = likes + 1 WHERE id = :idea_id";
+        $stmt = $conn->prepare($updateVoteCountQuery);
+        $stmt->bindParam(':idea_id', $idea_id, PDO::PARAM_INT);
         $stmt->execute();
 
         // Set a cookie to mark the user as having voted for this idea

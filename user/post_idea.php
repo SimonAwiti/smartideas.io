@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <textarea class="form-control" id="brief_description" name="brief_description" rows="6" placeholder="Describe your idea (max 150 words)" maxlength="150" required style="height: 200px;"></textarea>
                                     <label for="brief_description">Brief Description of Idea</label>
                                 </div>
-                                <p class="mt-3 text-center"> <a href="dashboard.php">Back to Dashboard</a></p>
+                                <p class="mt-3 text-center"> <a href="../allideas.php">Back to Dashboard</a></p>
                                 <p class="mt-3 text-center">By clicking submit, you accept our <a href="#">Terms and Conditions</a></p>
 
                                 <!-- Submit Button -->
