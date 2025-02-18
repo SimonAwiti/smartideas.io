@@ -44,7 +44,7 @@
                             <a class="nav-link click-scroll" href="#section_2">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="login.html">Login</a>
+                            <a class="nav-link click-scroll" href="user/login.php">Login</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link click-scroll" href="#section_5">Contact</a>
@@ -64,7 +64,7 @@
                             <div class="hero-text">
                                 <h3 class="mb-4" style="color:white;">Do you have a good business idea & you're in need of cash or a business partner?</h3>
                                 <h5 class="mb-4"style="color:white;">Post your business idea here at Goxlog Global marketplace and stand a chance of getting a business partner, investor or a well wisher.</h5>
-                                <p class="mb-4" ><a class="custom-btn btn custom-link" href="#section_2">Get started</a></p>
+                                <p class="mb-4" ><a class="custom-btn btn custom-link" href="user/login.php">Get started</a></p>
                             </div>
                         </div>
 

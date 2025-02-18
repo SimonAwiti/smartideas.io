@@ -1,12 +1,15 @@
 <?php
-define('DB_SERVER','localhost');
-define('DB_USER','root');
-define('DB_PASS' ,'123456Nairobi!');
-define('DB_NAME', 'cms');
-$con = mysqli_connect(DB_SERVER,DB_USER,DB_PASS,DB_NAME);
-// Check connection
-if (mysqli_connect_errno())
-{
- echo "Failed to connect to MySQL: " . mysqli_connect_error();
+$host = 'localhost';
+$dbname = 'smartideas';
+$username = 'root';
+$password = '123456Nairobi!';
+
+try {
+    // Using PDO to connect
+    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
 }
 ?>
+
