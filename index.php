@@ -22,26 +22,33 @@
                 <span class="spinner-rotate"></span>    
             </div>
         </section>
-
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <!-- Logo and Text for Larger Screens -->
+                <a href="index.html" class="navbar-brand d-flex align-items-center">
+                    <img src="images/logo.png" alt="Goxlog Logo" class="logo-img" style="height: 80px;">
+                    <span class="d-none d-lg-inline-block" style="color:white; margin-left: 10px; font-size: 1.5rem;">Marketplace for Business Ideas</span>
+                </a>
+
+                <!-- Hamburger button (visible only on mobile) -->
+                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <!-- Logo added here -->
-                <a href="index.html" class="navbar-brand mx-auto mx-lg-0">
-                    <h5 style="color:#b92504;"><img src="images/logo.png" alt="Goxlog Logo" class="logo-img" style="height: 80px;"> Goxlog Global</h5>
-                </a>
-
+                <!-- Navbar content (visible only on larger screens) -->
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <!-- Apply ms-auto to move the ul to the far right -->
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link click-scroll" href="#section_1">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link click-scroll" href="#section_2">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#section3">How it works</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="allideas.php">Posted Ideas</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link click-scroll" href="user/login.php">Login</a>
@@ -64,7 +71,7 @@
                             <div class="hero-text">
                                 <h3 class="mb-4" style="color:white;">Do you have a good business idea & you're in need of cash or a business partner?</h3>
                                 <h5 class="mb-4"style="color:white;">Post your business idea here at Goxlog Global marketplace and stand a chance of getting a business partner, investor or a well wisher.</h5>
-                                <p class="mb-4" ><a class="custom-btn btn custom-link" href="user/login.php">Get started</a></p>
+                                <p class="mb-4" ><a class="custom-btn btn custom-link" href="user/register.php">Register to get started</a></p>
                             </div>
                         </div>
 
@@ -78,6 +85,26 @@
 
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#535da1" fill-opacity="1" d="M0,160L24,160C48,160,96,160,144,138.7C192,117,240,75,288,64C336,53,384,75,432,106.7C480,139,528,181,576,208C624,235,672,245,720,240C768,235,816,213,864,186.7C912,160,960,128,1008,133.3C1056,139,1104,181,1152,202.7C1200,224,1248,224,1296,197.3C1344,171,1392,117,1416,90.7L1440,64L1440,0L1416,0C1392,0,1344,0,1296,0C1248,0,1200,0,1152,0C1104,0,1056,0,1008,0C960,0,912,0,864,0C816,0,768,0,720,0C672,0,624,0,576,0C528,0,480,0,432,0C384,0,336,0,288,0C240,0,192,0,144,0C96,0,48,0,24,0L0,0Z"></path></svg>
             </section>
+
+            <section style="background: #f9f9f9;"class="how-it-works section-padding" id="section_3">
+                <div class="container">
+                    <div class="row">
+                    <div class="col-lg-6 col-md-8 col-12">
+                            <div class="section-title-wrap d-flex justify-content-center align-items-center mb-5">
+                                <h3 class="text-white ms-4 mb-0">How it works</h3>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <ol class="text-grey" style="font-size: 1.0rem;">
+                                <li>Create an account and log in to your account</li>
+                                <li>After logging in, on the menu button, select "Post Idea" to post your business idea</li>
+                                <li>You will be directed to pay Ksh. 130 or 1 USD</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
 
             <section class="about section-padding" id="section_2">
                 <div class="container">
@@ -100,8 +127,8 @@
                                 <h3 class="text-white ms-4 mb-0">About Us</h3>
                             </div>
                         </div>
-                        <p>Welcome to Goxlog, the global marketplace for business ideas! At Goxlog, we believe that every great business starts with a bold idea, and we’re here to connect entrepreneurs, innovators, and business enthusiasts from around the world. Our platform is designed to empower individuals to share their business ideas, seek funding, or find the perfect partnership to bring their vision to life. Whether you’re an aspiring entrepreneur with a groundbreaking concept or an established business professional looking to collaborate, Goxlog provides a dynamic space to showcase your ideas, gain visibility, and connect with like-minded individuals. Users can explore a wide range of ideas, show their support by liking posts, and even discover opportunities to sponsor or fund the most promising ventures. </p>
-                        <p>At Goxlog, we’re passionate about fostering innovation and collaboration. Our mission is to create a global community where creativity meets opportunity, and where the best ideas have the chance to thrive. Join us today and be part of a platform that’s shaping the future of business, one idea at a time. Together, let’s turn ideas into reality!</p>
+                        <p style="font-size: 1.0rem;  text-align: justify;">Welcome to Goxlog, the global marketplace for business ideas! At Goxlog, we believe that every great business starts with a bold idea, and we’re here to connect entrepreneurs, innovators, and business enthusiasts from around the world. Our platform is designed to empower individuals to share their business ideas, seek funding, or find the perfect partnership to bring their vision to life. Whether you’re an aspiring entrepreneur with a groundbreaking concept or an established business professional looking to collaborate, Goxlog provides a dynamic space to showcase your ideas, gain visibility, and connect with like-minded individuals. Users can explore a wide range of ideas, show their support by liking posts, and even discover opportunities to sponsor or fund the most promising ventures. </p>
+                        <p style="font-size: 1.0rem;  text-align: justify;">At Goxlog, we’re passionate about fostering innovation and collaboration. Our mission is to create a global community where creativity meets opportunity, and where the best ideas have the chance to thrive. Join us today and be part of a platform that’s shaping the future of business, one idea at a time. Together, let’s turn ideas into reality!</p>
                         </div>
 
                     </div>

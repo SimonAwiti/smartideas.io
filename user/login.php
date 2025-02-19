@@ -76,6 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <label for="login-password">Password</label>
                                     </div>
 
+                                    <p class="mt-3 text-center"><a href="reset-password.php">Forgot your password?</a></p>
+
+
                                     <button style="background:#727aab;" type="submit" class="btn btn-primary w-100">Login</button>
 
                                     <p class="mt-3 text-center">Don't have an account? <a href="register.php">Sign up</a></p>

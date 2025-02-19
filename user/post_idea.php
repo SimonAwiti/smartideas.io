@@ -159,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <label for="brief_description">Brief Description of Idea</label>
                                 </div>
                                 <p class="mt-3 text-center"> <a href="../allideas.php">Back to Dashboard</a></p>
-                                <p class="mt-3 text-center">By clicking submit, you accept our <a href="#">Terms and Conditions</a></p>
+                                <p class="mt-3 text-center">By clicking submit, you accept our <a href="https://docs.google.com/document/d/1lnMnHYaCE_0hx2n4CYhA8-_YR3WKigy3/edit?usp=drive_link&ouid=100446546988873442885&rtpof=true&sd=true">Terms and Conditions</a></p>
 
                                 <!-- Submit Button -->
                                 <button style="background:#727aab;" type="submit" class="btn btn-primary w-100">Post Idea</button>
