@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Include database connection
-include('include/config.php');
+include('../include/config.php');
 
 // Fetch the user's information
 $user_id = $_SESSION['user_id'];
@@ -16,6 +16,13 @@ $stmt = $conn->prepare("SELECT fullname FROM users WHERE id = :id");
 $stmt->bindParam(':id', $user_id);
 $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Fetch only the logged-in user's ideas
+$phone = $_SESSION['phone'];
+$stmt = $conn->prepare("SELECT * FROM posted_ideas WHERE phone = :phone");
+$stmt->bindParam(':phone', $phone);
+$stmt->execute();
+$ideas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!doctype html>
@@ -25,16 +32,16 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Simon Awiti">
-    <title>All Posted Ideas - Goxlog.com</title>
+    <title>My Posted Ideas - Goxlog.com</title>
 
     <!-- CSS FILES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-icons.css" rel="stylesheet">
-    <link href="css/magnific-popup.css" rel="stylesheet">
-    <link href="css/templatemo-first-portfolio-style.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap-icons.css" rel="stylesheet">
+    <link href="../css/magnific-popup.css" rel="stylesheet">
+    <link href="../css/templatemo-first-portfolio-style.css" rel="stylesheet">
     
     <!-- Custom CSS -->
     <style>
@@ -132,6 +139,13 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             }
         }
     </style>
+
+    <!-- JavaScript for Delete Confirmation -->
+    <script>
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete this idea? This action cannot be undone.");
+        }
+    </script>
 </head>
 
 <body>
@@ -155,20 +169,19 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                         <i class="bi bi-house-door-fill"></i> Dashboard
                     </a>
                 </li>
-
                 <li class="nav-item">
-                    <a style="color:white;" class="nav-link" href="user/post_idea.php">
+                    <a style="color:white;" class="nav-link" href="post_idea.php">
                         <i class="bi bi-pencil-square"></i> Post Idea
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a style="color:white;" class="nav-link" href="user/posted_ideas.php">
+                    <a style="color:white;" class="nav-link" href="#">
                         <i class="bi bi-pencil-square"></i> My posted ideas
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a style="color:white;" class="nav-link" href="user/logout.php">
+                    <a style="color:white;" class="nav-link" href="logout.php">
                         <i class="bi bi-box-arrow-right"></i> Logout
                     </a>
                 </li>
@@ -180,7 +193,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             <div class="container">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h2 class="mb-0">All Posted Ideas</h2>
+                    <h2 class="mb-0">My Posted Ideas</h2>
                 </div>
 
                 <!-- Table for larger screens (hidden on mobile) -->
@@ -196,16 +209,11 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <th>Idea Type</th>
                                 <th>Brief Description of Idea</th>
                                 <th>Likes</th>
-                                <th>#</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            include('fetch_ideas.php'); // Include the fetch_ideas.php file
-
-                            // Fetch posted ideas from database
-                            $ideas = fetchIdeas($conn); // Fetch ideas from the posted_ideas table
-
                             if ($ideas !== null && count($ideas) > 0) {
                                 // Loop through the results and display each row
                                 foreach ($ideas as $row) {
@@ -219,9 +227,10 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                                             <td>" . $row['brief_description'] . "</td>
                                             <td>" . $row['likes'] . "</td>
                                             <td>
-                                                <form method='POST' action='vote.php'>
+                                                <a href='edit_idea.php?id=" . $row['id'] . "' class='btn btn-warning'>Edit</a>
+                                                <form method='POST' action='delete_idea.php' style='display:inline;' onsubmit='return confirmDelete();'>
                                                     <input type='hidden' name='idea_id' value='" . $row['id'] . "'>
-                                                    <button type='submit' name='vote' class='btn btn-primary' style='background-color: #2A095D; color: white;'>Like</button>
+                                                    <button type='submit' class='btn btn-danger'>Delete</button>
                                                 </form>
                                             </td>
                                         </tr>";
@@ -237,9 +246,6 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 <!-- Box/Card Layout for Small Screens (visible only on mobile) -->
                 <div class="d-block d-sm-none card-layout">
                     <?php
-                    // Fetch ideas again for small screen layout
-                    $ideas = fetchIdeas($conn);
-
                     if ($ideas !== null && count($ideas) > 0) {
                         // Loop through the results and display each idea as a card
                         foreach ($ideas as $row) {
@@ -253,9 +259,10 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                                         <p><strong>Idea Category:</strong> " . $row['idea_category'] . "</p>
                                         <p><strong>Description:</strong> " . $row['brief_description'] . "</p>
                                         <p><strong>likes:</strong> " . $row['likes'] . "</p>
-                                        <form method='POST' action='vote.php'>
+                                        <a href='edit_idea.php?id=" . $row['id'] . "' class='btn btn-warning'>Edit</a>
+                                        <form method='POST' action='delete_idea.php' style='display:inline;' onsubmit='return confirmDelete();'>
                                             <input type='hidden' name='idea_id' value='" . $row['id'] . "'>
-                                            <button type='submit' name='vote' class='btn btn-primary'>Like</button>
+                                            <button type='submit' class='btn btn-danger'>Delete</button>
                                         </form>
                                     </div>
                                 </div>";
@@ -270,13 +277,13 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     </main>
 
     <!-- JAVASCRIPT FILES -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery.sticky.js"></script>
-    <script src="js/click-scroll.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/magnific-popup-options.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery.sticky.js"></script>
+    <script src="../js/click-scroll.js"></script>
+    <script src="../js/jquery.magnific-popup.min.js"></script>
+    <script src="../js/magnific-popup-options.js"></script>
+    <script src="../js/custom.js"></script>
 
     <!-- JavaScript for Sidebar Toggle -->
     <script>
