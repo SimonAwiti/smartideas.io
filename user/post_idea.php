@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start the session
+session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -28,24 +28,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idea_category = $_POST['idea_category'];
     $brief_description = $_POST['brief_description'];
 
-    // Insert posted idea into the database
-    $stmt = $conn->prepare("INSERT INTO posted_ideas (fullname, email, phone, country, looking_for, idea_category, brief_description) 
-                            VALUES (:fullname, :email, :phone, :country, :looking_for, :idea_category, :brief_description)");
-    $stmt->bindParam(':fullname', $fullname);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':phone', $phone);
-    $stmt->bindParam(':country', $country);
-    $stmt->bindParam(':looking_for', $looking_for);
-    $stmt->bindParam(':idea_category', $idea_category);
-    $stmt->bindParam(':brief_description', $brief_description);
+    // Store the idea details in the session for later use
+    $_SESSION['idea_data'] = [
+        'fullname' => $fullname,
+        'email' => $email,
+        'phone' => $phone,
+        'country' => $country,
+        'looking_for' => $looking_for,
+        'idea_category' => $idea_category,
+        'brief_description' => $brief_description,
+    ];
 
-    if ($stmt->execute()) {
-        // Success: Redirect to a confirmation page or the dashboard
-        header('Location: ../allideas.php');
-        exit();
-    } else {
-        $error = "There was an issue posting your idea. Please try again.";
-    }
+    // Redirect to Pesapal payment page
+    header('Location: pesapal_payment.php');
+    exit();
 }
 ?>
 
