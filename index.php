@@ -26,7 +26,7 @@
             <div class="container">
                 <!-- Logo and Text for Larger Screens -->
                 <a href="index.html" class="navbar-brand d-flex align-items-center">
-                    <img src="images/logo.png" alt="Goxlog Logo" class="logo-img" style="height: 80px;">
+                    <img src="images/Goxloglogo.png" alt="Goxlog Logo" class="logo-img" style="height: 80px;">
                     <span class="d-none d-lg-inline-block" style="color:white; margin-left: 10px; font-size: 1.5rem;">Marketplace for Business Ideas</span>
                 </a>
 
@@ -48,10 +48,10 @@
                             <a class="nav-link click-scroll" href="#section3">How it works</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="allideas.php">Posted Ideas</a>
+                            <a class="nav-link click-scroll" href="postedideas.php">Posted Ideas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="user/login.php">Login</a>
+                            <a class="nav-link" href="user/login.php">Login</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link click-scroll" href="#section_5">Contact</a>
@@ -98,7 +98,7 @@
                             <ol class="text-grey" style="font-size: 1.0rem;">
                                 <li>Create an account and log in to your account</li>
                                 <li>After logging in, on the menu button, select "Post Idea" to post your business idea</li>
-                                <li>You will be directed to pay Ksh. 130 or 1 USD</li>
+                                <li>You will be directed to pay 3 USD or Ksh.300,<br>10 USD, 20 USD or 50 USD (depending on the no of days)i.e <br>For 3 USD, your idea will be online for 2 days, <br>10 USD for 5 days,<br> 20 USD for 10 days<br> & 50 usd for 30 days </li>
                             </ol>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
 
 
                                 <div class="col-lg-6 col-12">
-                                    <img src="images/logo.jpg" class="about-image img-fluid" alt="">
+                                    <img src="images/Goxloglogo.png" class="about-image img-fluid" alt="">
                                 </div>
 
                                 </div>
@@ -172,10 +172,10 @@
                                     </a>
                                 </p>
 
-                                <strong class="site-footer-title d-block mt-4 mb-3">Call</strong>
+                                <strong class="site-footer-title d-block mt-4 mb-3">Call/Whatsapp</strong>
                                 <p class="mb-0">
                                     <a href="tel: 120-240-9600">
-                                        +2547 9822 6640
+                                        +254-108-008-008 <br> +254-757-942-358
                                     </a>
                                 </p>
                             </div>
