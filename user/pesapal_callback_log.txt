@@ -1,0 +1,12 @@
+Array
+(
+    [pesapal_transaction_tracking_id] => 6f300c87-970e-4cf1-96ca-dc0d422a9644
+    [pesapal_merchant_reference] => 67d2c4ce68854
+)
+Invalid payment status or tracking ID
+Array
+(
+    [pesapal_transaction_tracking_id] => 4d4b2c5b-b347-45a7-b720-dc0df1419e17
+    [pesapal_merchant_reference] => 67d2c583cbb2f
+)
+Invalid payment status or tracking ID

@@ -27,6 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $looking_for = $_POST['looking_for'];
     $idea_category = $_POST['idea_category'];
     $brief_description = $_POST['brief_description'];
+    $currency = $_POST['currency'];
+    $amount = $_POST['amount'];
 
     // Store the idea details in the session for later use
     $_SESSION['idea_data'] = [
@@ -37,6 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'looking_for' => $looking_for,
         'idea_category' => $idea_category,
         'brief_description' => $brief_description,
+        'currency' => $currency,
+        'amount' => $amount,
     ];
 
     // Redirect to Pesapal payment page
@@ -114,16 +118,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <label for="email">Email address</label>
                                 </div>
 
-                                <!-- contact (from session) -->
+                                <!-- Contact (from session) -->
                                 <div class="form-floating mb-3">
                                     <input type="phone" class="form-control" id="phone" name="phone" placeholder="Phone no." value="<?php echo htmlspecialchars($user['phone']); ?>" readonly>
-                                    <label for="phone">phone no.</label>
+                                    <label for="phone">Phone no.</label>
                                 </div>
 
                                 <!-- Country (from session) -->
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="country" name="country" placeholder="Country" value="<?php echo htmlspecialchars($user['country']); ?>" readonly>
                                     <label for="country">Country</label>
+                                </div>
+
+                                <!-- Currency Selection -->
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" id="currency" name="currency" required onchange="handleCurrencyChange()">
+                                        <option value="" disabled selected>Select currency</option>
+                                        <option value="KES">KES</option>
+                                        <option value="USD">USD</option>
+                                    </select>
+                                    <label for="currency">Currency</label>
+                                </div>
+
+                                <!-- Amount Input -->
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="amount" name="amount" placeholder="Amount" value="300" readonly>
+                                    <label for="amount">Amount</label>
                                 </div>
 
                                 <!-- Looking For Dropdown -->
@@ -175,5 +195,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="../js/jquery.magnific-popup.min.js"></script>
     <script src="../js/magnific-popup-options.js"></script>
     <script src="../js/custom.js"></script>
+
+    <!-- Custom Script for Currency Handling -->
+    <script>
+        function handleCurrencyChange() {
+            const currencySelect = document.getElementById('currency');
+            const amountInput = document.getElementById('amount');
+
+            if (currencySelect.value === 'KES') {
+                amountInput.value = 300;
+                amountInput.readOnly = true; // Make the amount field read-only for KES
+            } else if (currencySelect.value === 'USD') {
+                amountInput.value = ''; // Allow manual input for USD
+                amountInput.readOnly = false;
+            }
+        }
+    </script>
 </body>
 </html>
