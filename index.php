@@ -69,9 +69,9 @@
 
                         <div class="col-lg-7 col-12">
                             <div class="hero-text">
-                                <h3 class="mb-4" style="color:white;">Do you have a good business idea & you're in need of cash or a business partner?</h3>
-                                <h5 class="mb-4"style="color:white;">Post your business idea here at Goxlog Global marketplace and stand a chance of getting a business partner, investor or a well wisher.</h5>
-                                <p class="mb-4" ><a class="custom-btn btn custom-link" href="user/register.php">Register to get started</a></p>
+                                <h3 class="mb-4" style="color:white;">Do you have a good business idea or an invention & you're unable to start the business because of lack of money/capital?</h3>
+                                <h5 class="mb-4"style="color:white;">Post your business idea at Goxlog, a business idea marketplacefor those with good business ideas. Global marketplace and stand a chance of getting a business partner, investor or a well wisher.</h5>
+                                <p class="mb-4" ><a class="custom-btn btn custom-link" href="user/register.php">Register and get started</a></p>
                             </div>
                         </div>
 
